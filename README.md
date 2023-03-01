@@ -1,4 +1,12 @@
-# Preact Boilerplate / Starter Kit for a Weather App
+# Group Project Weather-App: Preact (ECS522U)
+
+## Group 80
+
+Project Members: Bhavan Thevathas, Majd Taha, Cameron Taylor, Hamza Tandel, Maria Surani
+
+Module Organiser: Jane Reid
+
+Moduke Lecturer: Issa Khalifeh
 
 ## Set-Up Guide
 - [Installation](#installation)
