@@ -1,0 +1,164 @@
+{
+    "warnings": [
+      {
+        "title": "Heavy rain",
+        "description": "Underfoot conditions change rapidly."
+      },
+      {
+        "title": "Severe thunderstorm",
+        "description": "Possible lightning, hail, and strong winds. Stay indoors."
+      },
+      {
+        "title": "Tropical cyclone",
+        "description": "Powerful winds and heavy rain can cause damage. Follow evacuation orders."
+      },
+      {
+        "title": "Blizzard",
+        "description": "Strong winds and heavy snow can cause whiteout conditions."
+      },
+      {
+        "title": "Extreme heat",
+        "description": "High temperatures can cause heat exhaustion or heat stroke. Stay hydrated and avoid prolonged exposure to the sun."
+      },
+      {
+        "title": "Flash flood",
+        "description": "Sudden and rapid flooding can occur due to heavy rain or dam failures. Seek higher ground and avoid driving through flooded areas."
+      },
+      {
+        "title": "Tornado",
+        "description": "Violent rotating winds can cause significant damage. Seek shelter immediately and stay away from windows."
+      },
+      {
+        "title": "Drought",
+        "description": "Extended periods of dry weather can lead to water shortages and crop failures. Conserve water and follow local restrictions."
+      },
+      {
+        "title": "Wildfire",
+        "description": "Dry and windy conditions can cause fires to spread quickly. Follow evacuation orders and stay away from affected areas."
+      },
+      {
+        "title": "Hazardous air quality",
+        "description": "High levels of air pollution can cause respiratory problems. Avoid outdoor activities and limit exposure to pollution."
+      },
+      {
+        "title": "Avalanche warning",
+        "description": "Heavy snowfall or warming temperatures can cause avalanches. Avoid steep slopes and take safety precautions."
+      },
+      {
+        "title": "High wind warning",
+        "description": "Strong winds can make balance difficult and increase risk of hypothermia. Secure equipment and consider postponing climb."
+      },
+      {
+        "title": "Freezing rain warning",
+        "description": "Ice on equipment and surfaces can be dangerous. Use caution and retreat if necessary."
+      },
+      {
+        "title": "Lightning warning",
+        "description": "Thunderstorms can create danger on peaks. Seek shelter and avoid being tallest object in area."
+      },
+      {
+        "title": "Ice storm warning",
+        "description": "Freezing rain can create treacherous climbing conditions and cause outages. Wait until storm has passed to attempt climb."
+      },
+      {
+        "title": "Whiteout warning",
+        "description": "Blowing snow and low visibility can disorient climbers. Stay together and use landmarks for navigation."
+      },
+      {
+        "title": "Extreme cold warning",
+        "description": "Extreme cold can cause frostbite and hypothermia. Dress in layers and bring warm gear."
+      },
+      {
+        "title": "High altitude warning",
+        "description": "Altitude sickness can occur above 8,000 feet. Acclimate properly and be aware of signs."
+      },
+      {
+        "title": "Rockfall warning",
+        "description": "Falling rocks and debris can be dislodged. Stay alert and wear a helmet."
+      },
+      {
+        "title": "Blowdown warning",
+        "description": "Strong winds can cause trees to fall, creating dangerous conditions. Be aware of surroundings and have a plan."
+      },
+      {
+        "title": "High UV index warning",
+        "description": "High altitudes and clear skies can increase UV radiation exposure. Wear protective clothing and sunscreen."
+      },
+      {
+        "title": "Hailstorm warning",
+        "description": "Hail can create dangerous climbing conditions. Seek shelter and wait for storm to pass."
+      },
+      {
+        "title": "Glacial melt warning",
+        "description": "Rapid glacial melt can create unstable conditions. Be aware of potential flooding and debris flow."
+      },
+      {
+        "title": "Thawing permafrost warning",
+        "description": "Thawing permafrost can create unstable terrain and increase the risk of rockslides and landslides. Take extra care when crossing unstable terrain."
+      },
+      {
+        "title": "High humidity warning",
+        "description": "High humidity can increase risk of dehydration. Stay hydrated and take breaks as needed."
+      },
+      {
+        "title": "Sandstorm warning",
+        "description": "Strong winds can create sandstorms in desert areas. Seek shelter and cover your face and eyes."
+      },
+      {
+        "title": "High water warning",
+        "description": "Heavy rainfall or snowmelt can create high water conditions on rivers and streams. Plan alternate routes or wait for water levels to recede."
+      },
+      {
+        "title": "Volcanic eruption warning",
+        "description": "Volcanic activity can create hazardous conditions. Stay up to date on local alerts and follow evacuation orders if necessary."
+      },
+      {
+        "title": "Frost heave warning",
+        "description": "Freezing and thawing cycles can create unstable conditions. Be cautious when crossing unstable terrain."
+      },
+      {
+        "title": "Solar storm warning",
+        "description": "Be prepared for electronic equipment disruption and dangerous conditions for climbers during solar storms. Use backup equipment and communication methods."
+      },
+      {
+        "title": "High winds warning",
+        "description": "Secure loose gear and equipment in high winds to avoid falling or being blown off course. Seek shelter if necessary."
+      },
+      {
+        "title": "Gust front warning",
+        "description": "Take precautions to secure your campsite from sudden and powerful wind gusts caused by gust fronts. Be aware of incoming weather systems."
+      },
+      {
+        "title": "Downslope windstorm warning",
+        "description": "Seek shelter in sturdy structures during downslope windstorms, which can cause severe wind gusts and damage to buildings and trees."
+      },
+      {
+        "title": "Katabatic wind warning",
+        "description": "Prepare for dangerous conditions for climbers caused by strong and persistent downslope winds. Use appropriate clothing and equipment."
+      },
+      {
+        "title": "Microburst warning",
+        "description": "Be aware of incoming weather systems and seek shelter if necessary from powerful downward bursts of wind, known as microbursts."
+      },
+      {
+        "title": "Blizzard warning",
+        "description": "Stay inside or seek shelter during blizzards, which are characterized by strong winds and blowing snow that can reduce visibility to near zero and be deadly for climbers."
+      },
+      {
+        "title": "Fog warning",
+        "description": "Be cautious when navigating on the mountain during fog, which can reduce visibility. Wait for the fog to lift before continuing your climb."
+      },
+      {
+        "title": "Sandstorm warning",
+        "description": "Cover your face and eyes and seek shelter during sandstorms, which can create respiratory problems and reduce visibility."
+      },
+      {
+        "title": "Smoke warning",
+        "description": "Stay informed of air quality alerts during wildfires, which can create thick smoke that reduces visibility and creates respiratory problems. Consider rescheduling your climb if air quality is poor."
+      },
+      {
+        "title": "Whiteout warning",
+        "description": "Stay put or seek shelter during whiteouts, which occur when visibility is completely obscured by snow or ice and can be extremely disorienting and dangerous for climbers."
+      }
+    ]
+  }
