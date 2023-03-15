@@ -7,7 +7,7 @@ export default class Header extends Component {
         super(props);
     }
 
-
+    
     render() {
         let location, temp, date, temp_min, temp_max;
 
@@ -19,7 +19,9 @@ export default class Header extends Component {
             temp_min = parseInt(this.props.data['main']['temp_min']);
             temp_max = parseInt(this.props.data['main']['temp_max']);
             date = new Date().toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric'});
+            
         }
+        
 
         console.log(typeof(date))
 
@@ -37,7 +39,7 @@ export default class Header extends Component {
                             <span>L:{temp_min}° </span>
                             <span>H:{temp_max}°</span>
                         </div>
-                    </div>
+                    </div>  
                 </div>
             ) : null 
         );
