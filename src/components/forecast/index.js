@@ -2,10 +2,19 @@ import { h, render, Component } from 'preact';
 import style from './style_forecast';
 import WeatherItem from '../weatherItem'
 
+// This class represents a forecast component that displays 
+// weather information for the next 24 hours or the next few days
 export default class Forecast extends Component {
-        // a constructor with initial set states
+
+        // Constructor function that sets the initial state of the component
         constructor(props) {
             super(props);
+
+            // Define the initial state of the component with the following properties:
+            // 1. displayFuture: boolean value that toggles the display of future content or not
+            // 2. startIdx: integer value that determines the starting index of the content to be displayed
+            // 3. endIdx: integer value that determines the ending index of the content to be displayed
+            // 4. added: integer value that tracks number of elements traversed 
             this.state = {
               displayFuture: false,
               startIdx: 0,
@@ -14,6 +23,8 @@ export default class Forecast extends Component {
             };
           }
 
+        
+        // A function that resets the state of the component to display the weather information for the next 24 hours
         getCurrent = () => {
             this.setState(() => ({
                 startIdx: 0,
@@ -23,19 +34,21 @@ export default class Forecast extends Component {
             }));
         };
         
-        // sets up the indices to get gets the next forecast from the list 
+        // A function that updates the state of the component to add a new element to the 3-hourly forecast
         getNextHour = () => {
             this.setState((prevState) => {
-                const newEndIdx = prevState.endIdx + 1; // increment the number of elements to show by 1, but not beyond 9
                 const newStartIdx = prevState.startIdx + 1;
                 const newAdded = prevState.added + 1;
                 
+                // If the added value exceeds 8, meaning that 24 hours of forecast data have been shown, 
+                // return null to stop loading more data
+                // Otherwise, return a new state object with the updated indices and added value
                 if (newAdded > 8) {
-                    return null; // reached 24h forecast = 8 element = each element is the forcast over 3 hours
+                    return null; 
                 } else {
                     return {
                         startIdx: newStartIdx,
-                        endIdx: newEndIdx,
+                        endIdx: newStartIdx + 4,
                         displayFuture: false,
                         added: newAdded,
                     };
@@ -44,9 +57,10 @@ export default class Forecast extends Component {
         };
 
 
-        // sets up the indices to get the forecast starting from first 12AM element = next day
+        // A function that updates the state of the component to display the forecast information starting from the next day
         getTommorrow = () => {
             this.setState((prevState) => {
+                // Find the index of the first element that represents the start of the next day (first 12AM element)
                 const newDayStartIdx = this.props.data ? this.props.data.list.findIndex((item, idx) => {
                     const date = new Date(item.dt * 1000);
                     return date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0;
@@ -62,9 +76,11 @@ export default class Forecast extends Component {
             });
         };
 
-        // sets up the indices to get forecast over next days
-        getNextFive = () => {
+        // A function that updates the state of the component to display the forecast information for the next four days
+        getNextFour = () => {
             this.setState((prevState) => {
+                // Start index is set at 9 because there will be at most 8 element corresponding to today's weather
+                // End index is set at 40 to traverse the entire array (fixed size of 40 returned from the API)
                 return {
                     startIdx: 9,
                     endIdx: 40,
@@ -75,7 +91,7 @@ export default class Forecast extends Component {
             });
         };
 
-        // the main render method for the iphone component
+        // Main render method for the Forecast component
         render() {
             const { endIdx, startIdx } = this.state;
 
@@ -84,7 +100,7 @@ export default class Forecast extends Component {
                     <div className={style.rowContainer}>
                         <button onClick={this.getCurrent}> 24h </button>
                         <button onClick={this.getTommorrow}> Tomorrow </button>
-                        <button onClick={this.getNextFive}> Next 4 Days </button>
+                        <button onClick={this.getNextFour}> Next 4 Days </button>
 
                     </div>
                     {this.props.data  ? (

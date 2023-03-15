@@ -1,18 +1,20 @@
 import { h, render, Component } from 'preact';
 import style from './style_header';
 
-// Top part of the screen - Location / Date / Current, Min, Max Temperature
+// This is the header component that displays the top part of the screen, 
+// which includes the Location, Date and Current, Min, Max Temperature
 export default class Header extends Component {
     constructor(props) {
         super(props);
     }
 
-    
+
+    // The main render method for the header component
     render() {
         let location, temp, date, temp_min, temp_max;
 
-        // props is data passed from parent (iphone component) 
-        // props.data = current weather forecast
+        // Check if there is data passed from the parent component (iPhone component) 
+        // and assign values to the variables
         if (this.props.data) {
             location = this.props.data['name'];
             temp = parseInt(this.props.data['main']['temp']);
@@ -22,8 +24,6 @@ export default class Header extends Component {
             
         }
         
-
-        console.log(typeof(date))
 
         return (
             this.props.data ? (

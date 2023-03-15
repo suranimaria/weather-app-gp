@@ -1,6 +1,8 @@
 import { h, render, Component } from 'preact';
 import style from './style_weatherItem';
 
+// Component that represents the 3-hourly weather forecast for a specific time period.
+// It displays the time, weather icon, precipitation percentage, and average temperature for every 3-hour period.
 export default class WeatherItem extends Component {
     render() {
       const { item, displayFuture, index } = this.props;

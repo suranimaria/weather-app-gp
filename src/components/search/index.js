@@ -3,6 +3,7 @@ import { h, render, Component } from 'preact';
 import $ from 'jquery';
 import style from './style_search';
 
+// Search component for finding new locations
 export default class Search extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,7 @@ export default class Search extends Component {
     }
 }
 
-    // api call to get cities that start with the prefix put by the user - sorted by population
+    // fetch cities that start with the prefix put by the user - sorted by population
     fetchLocation = (location) => {
 		$.ajax({
 			method: 'GET',
@@ -36,19 +37,19 @@ export default class Search extends Component {
         this.setState({ placeHolder: "Enter location" });
 	}
 
-    // fetch new locations for the prefix when the user clicks away
+    // triggered when the input value changes
     handleChange = (event) => {
 		this.fetchLocation(event.target.value)
 	}
 
-    // fetch new locations for the prefix when the user clicks enter
+    // triggered when the user presses the "enter" key while the input is focused
     handleKeyPress = (event) => {
         if (event.key === "Enter") {
             this.fetchLocation(event.target.value)
         }
 	}
 
-    // triggered when the user clicks on one of the cities from list
+    // triggered when the user clicks on one of the cities from the list
     onClick = (event) => {
 		let innerHTML = event.target.innerHTML;
 		let city = innerHTML.split(',')[0];
@@ -56,6 +57,7 @@ export default class Search extends Component {
         this.props.onSelect(city);
 	}
 
+    // triggered when the "Go Back" button is clicked
     goBack = () => {
         this.props.onBack(false);
     }
