@@ -7,7 +7,12 @@ export default class Search extends Component {
     constructor(props) {
         super(props);
         this.setState({ placeholder: 'Enter location..' });
+        this.state = {
+            cities: [],
+            savedLocations: [],
+            showSavedLocations: false
     }
+}
 
     // api call to get cities that start with the prefix put by the user - sorted by population
     fetchLocation = (location) => {
@@ -55,6 +60,42 @@ export default class Search extends Component {
         this.props.onBack(false);
     }
 
+    // save current location to the list of saved locations
+    saveLocation = () => {
+        if (this.state.location && !this.state.savedLocations.includes(this.state.location)) {
+            const newSavedLocations = [...this.state.savedLocations, this.state.location];
+            this.setState({ savedLocations: newSavedLocations });
+            alert(`Location '${this.state.location}' has been saved.`);
+        }
+    }
+
+    
+    // display list of saved locations and allow user to select one
+    viewSavedLocations = () => {
+        const locationsList = this.state.savedLocations.map((location, index) => {
+          return (
+            <div class={style.itemList} key={index} onClick={this.onClick}>{location}</div>
+          );
+        });
+        return locationsList;
+      }
+
+
+    //Toggle the saved locations visibility
+    toggleVisibility() {
+        var div = document.getElementById("savedLocations");
+        if (div.style.display === "none") {
+          div.style.display = "block";
+        } else {
+          div.style.display = "none";
+        }
+      }
+      
+      
+      
+
+
+
     render() {
         console.log(this.state)
         return (
@@ -70,7 +111,21 @@ export default class Search extends Component {
                 { this.state.cities ? this.state.cities.map((item) => (
                     <div class={style.itemList} onClick={this.onClick}> {item.city}, {item.countryCode} </div>)
                 ) : null}
+
+                    
+            
                 <button onClick={this.goBack}>Apply changes</button>
+                <button onClick={this.saveLocation}>Save Location</button>
+                <button onclick={this.toggleVisibility}>View Saved Locations</button>
+                
+                
+                {this.state.savedLocations.length > 0 && (
+                    <div id="savedLocations" class={style.savedLocations} style="display:none">
+                    <h3>Saved Locations</h3>
+                    {this.viewSavedLocations()}
+                </div>
+                )} 
+                
             </div>
         );
     }
