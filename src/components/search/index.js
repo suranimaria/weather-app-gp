@@ -53,9 +53,9 @@ export default class Search extends Component {
 		let innerHTML = event.target.innerHTML;
 		let city = innerHTML.split(',')[0];
 		this.setState({ location: city }); // setting new location
-        this.props.onSelect(city);
+        this.props.onSelect(city); // notify the parent component of the selected location
 	}
-
+// called when the user clicks the "Apply changes" button
     goBack = () => {
         this.props.onBack(false);
     }
@@ -64,7 +64,7 @@ export default class Search extends Component {
     saveLocation = () => {
         if (this.state.location && !this.state.savedLocations.includes(this.state.location)) {
             const newSavedLocations = [...this.state.savedLocations, this.state.location];
-            this.setState({ savedLocations: newSavedLocations });
+            this.setState({ savedLocations: newSavedLocations }); // add the location to the list of saved locations
             alert(`Location '${this.state.location}' has been saved.`);
         }
     }
@@ -82,6 +82,7 @@ export default class Search extends Component {
 
 
     //Toggle the saved locations visibility
+    // called when the user clicks the "View Saved Locations" button to toggle the visibility of the saved locations list
     toggleVisibility() {
         var div = document.getElementById("savedLocations");
         if (div.style.display === "none") {

@@ -5,9 +5,10 @@ import $ from 'jquery';
 export default class Warnings extends Component {
     constructor(props) {
         super(props);
+        // Call the function to fetch the warnings data
         this.fetchWarnings();
     }
-
+// Fetches the warnings data from a JSON file using jQuery's AJAX method
     fetchWarnings = () => {
         $.getJSON('../../assets/data/extreme-weather-warnings.json', (data) => {
           this.setState({
@@ -15,6 +16,7 @@ export default class Warnings extends Component {
           });
             // console.log(data.warnings[0])
         })
+        // Log an error message to the console if the data cannot be fetched
         .fail((errorThrown) => {
           console.error('Failed to fetch warnings: ' + errorThrown);
         });
@@ -48,6 +50,7 @@ export default class Warnings extends Component {
                 ))}
               </div>
             ) : (
+               // If the warnings data has not been fetched yet, display a loading message
               <p>Loading warnings...</p>
             )}
           </div>

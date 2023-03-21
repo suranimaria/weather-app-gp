@@ -9,6 +9,7 @@ export default class Header extends Component {
 
     
     render() {
+         // Initialize variables for location, temperature, date, and minimum/maximum temperature
         let location, temp, date, temp_min, temp_max;
 
         // props is data passed from parent (iphone component) 
@@ -22,9 +23,9 @@ export default class Header extends Component {
             
         }
         
-
+// Log the type of the `date` variable (should be a string)
         console.log(typeof(date))
-
+// Render the header if `data` is true, otherwise render nothing
         return (
             this.props.data ? (
                 <div class={style.header}>
