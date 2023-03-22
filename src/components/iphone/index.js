@@ -5,48 +5,57 @@ import style from './style';
 // import jquery for API calls
 import $ from 'jquery';
 
+// import components
 import Forecast from '../forecast';
 import Search from '../search';
 import Header from '../header';
 import Panel from '../panel';
 import Warnings from '../warnings';
+import Favourites from '../favourites';
 
-// api key for weather data
+// API key for weather data
 const API_KEY = "f01a60b785b3768cea4113877c7c2a72"
 
-// Essentially root component - hosts all other components
+// This component is essentially the root component and it hosts all the other components
 export default class Iphone extends Component {
-	// a constructor with initial set states
+	// A constructor that sets initial states for the component
 	constructor(props){
 		super(props);
 		this.setState({
 			location: "London",
+			displayHomeScreen: true,
 			displaySearchPanel: false,
-
+			displayFavouritesPanel: false,
+			savedLocations: []
 		});
 
-		// fecthing the data
+		// Fetching the current weather data and forecast data using two API calls
 		this.fetchCurrentWeatherData();
 		this.fetchForecastData();
 	}
 
-	// fetch current weather data 
+	// This function fetches the current weather data from the OpenWeatherMap API using the location state
 	fetchCurrentWeatherData = () => {
 		var url = `http://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=metric&APPID=${API_KEY}`;
 		$.ajax({
 			url: url,
 			dataType: "jsonp",
+			// If the API call is successful, the fetched data is stored in the currWeather state
 			success : (parsed_json) => {
 				this.setState({
 					currWeather: parsed_json
 				});
 			},
-			error : function(req, err){ console.log('API call failed ' + err); }
+			// If the API call fails, an error message is logged and an alert is shown to the user
+			error : function(req, err){ 
+				console.log('API call failed ' + err);
+				alert('Sorry, location is not available at the moment. Please try again later.');
+			}
 		})
 	}
 
 
-	/// fetch forecast weather data - for next 4 days
+	// Fetch forecast weather data for the next 5 days
 	fetchForecastData = () => {
 		var url = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.location}&units=metric&APPID=${API_KEY}`;
 		$.ajax({
@@ -61,27 +70,58 @@ export default class Iphone extends Component {
 		})
 	}
 
-	// switches between showing the information / search panels
-	// triggered by the bottom buttons - Search / Go Back
-	displaySearchPanel = (value) => {
-		this.setState({ displaySearchPanel: value });
+	// Displays the searching panel
+	// Triggered by the bottom button - Search
+	displaySearchPanel = () => {
+		this.setState({ 
+			displaySearchPanel: true,
+			displayHomeScreen: false,
+			displayFavouritesPanel: false,
+		});
 	}
 
-	// triggered from the Search component - new location selected
+	// Triggered from within Search / Favourites panel to return to home screen
+	// via Apply Changes / Go Back button
+	displayHomeScreen = (updatedSavedLocations) => {
+		if (updatedSavedLocations) {
+			this.setState({ savedLocations: updatedSavedLocations });
+		}
+		this.setState({ 
+			displayHomeScreen: true,
+			displaySearchPanel: false,
+			displayFavouritesPanel: false,
+		});
+
+		console.log(this.state.savedLocations)
+	}
+
+	// Displays the searching panel
+	// Triggered by the bottom button - Favourites
+	displayFavouritesPanel = () => {
+		this.setState({ 
+			displayFavouritesPanel: true,
+			displayHomeScreen: false,
+			displayHomeScreen: false,
+		});
+	}
+
+	// Triggered from within the Search component when a new location is selected
 	handleSelect = (value) => {
-		this.setState({ location: value }); // setting new location
+		this.setState({ location: value }); 
+
+		// Fetch current weather data and forecast data for the new location
 		this.fetchCurrentWeatherData();
 		this.fetchForecastData();
 	};
 
 
-	// the main render method for the iphone component
+	// Main render method for the iphone component
 	render() {
 		return (
 			<div class={style.container} id="iphone">
 				<Header class={style.header} data={this.state.currWeather}/>
 				<div class={style.body}> 
-					{!this.state.displaySearchPanel ? (
+					{this.state.displayHomeScreen ? (
 						<div class={style.box}>
 							{/* Intro panel with precipitation / pressure / wind speed */}
 							<Panel todayWeather={this.state.currWeather} forecastWeather={this.state.forecast}/>
@@ -94,8 +134,16 @@ export default class Iphone extends Component {
 
 							{/* Switch to Search Panel */}
 							<button  onClick={this.displaySearchPanel}>Search</button>
+
+							{/* Switch to Search Panel */}
+							<button  onClick={this.displayFavouritesPanel}>Favourites</button>
 						</div>
-					) : <Search onSelect={this.handleSelect} onBack={this.displaySearchPanel} />} 
+						/* Search Panel */
+					) : null}
+					{this.state.displaySearchPanel ? 
+						<Search onSelect={this.handleSelect} onBack={this.displayHomeScreen} /> : null}
+					{this.state.displayFavouritesPanel ? 
+						<Favourites savedLocations = {this.state.savedLocations} onSelect={this.handleSelect} onBack={this.displayHomeScreen} /> : null} 
 				</div>
 			</div>
 
