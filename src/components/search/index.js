@@ -7,11 +7,10 @@ import style from './style_search';
 export default class Search extends Component {
     constructor(props) {
         super(props);
-        this.setState({ placeholder: 'Enter location..' });
         this.state = {
             cities: [],
             savedLocations: [],
-            showSavedLocations: false
+            showSavedLocations: false,
     }
 }
 
@@ -50,16 +49,17 @@ export default class Search extends Component {
 	}
 
     // triggered when the user clicks on one of the cities from the list
-    onClick = (event) => {
-		let innerHTML = event.target.innerHTML;
-		let city = innerHTML.split(',')[0];
-		this.setState({ location: city }); // setting new location
-        this.props.onSelect(city);
+    selectLocation = (event) => {
+      
+      let innerHTML = event.target.innerHTML;
+      let city = innerHTML.split(',')[0];
+      this.setState({ location: city }); // setting new location
+          this.props.onSelect(city);
 	}
 
     // triggered when the "Go Back" button is clicked
     goBack = () => {
-        this.props.onBack(false);
+      this.props.onBack(this.state.savedLocations);
     }
 
     // save current location to the list of saved locations
@@ -71,63 +71,27 @@ export default class Search extends Component {
         }
     }
 
-    
-    // display list of saved locations and allow user to select one
-    viewSavedLocations = () => {
-        const locationsList = this.state.savedLocations.map((location, index) => {
-          return (
-            <div class={style.itemList} key={index} onClick={this.onClick}>{location}</div>
-          );
-        });
-        return locationsList;
-      }
-
-
-    //Toggle the saved locations visibility
-    toggleVisibility() {
-        var div = document.getElementById("savedLocations");
-        if (div.style.display === "none") {
-          div.style.display = "block";
-        } else {
-          div.style.display = "none";
-        }
-      }
-      
-      
-      
-
-
 
     render() {
-        console.log(this.state)
         return (
             <div class={style.container}>
                 <input
                     onChange={this.handleChange}
                     onKeyPress={this.handleKeyPress}
-                    placeholder={this.state.placeholder}
+                    placeholder='Enter location..'
                     class={style.search}
                     type="text"
                 />
                 {/* Outputs first 5 results of cities that match user input */}
                 { this.state.cities ? this.state.cities.map((item) => (
-                    <div class={style.itemList} onClick={this.onClick}> {item.city}, {item.countryCode} </div>)
+                    <div class={style.itemList} onClick={this.selectLocation}> {item.city}, {item.countryCode} </div>)
                 ) : null}
 
                     
-            
-                <button onClick={this.goBack}>Apply changes</button>
-                <button onClick={this.saveLocation}>Save Location</button>
-                <button onclick={this.toggleVisibility}>View Saved Locations</button>
-                
-                
-                {this.state.savedLocations.length > 0 && (
-                    <div id="savedLocations" class={style.savedLocations} style="display:none">
-                    <h3>Saved Locations</h3>
-                    {this.viewSavedLocations()}
-                </div>
-                )} 
-                
+                <div class={style.buttonContainer}>
+                  <button onClick={this.goBack}>Apply changes</button>
+                  <button onClick={this.saveLocation}>Save Location</button>
+                </div>      
             </div>
         );
     }

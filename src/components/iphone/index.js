@@ -11,6 +11,7 @@ import Search from '../search';
 import Header from '../header';
 import Panel from '../panel';
 import Warnings from '../warnings';
+import Favourites from '../favourites';
 
 // API key for weather data
 const API_KEY = "f01a60b785b3768cea4113877c7c2a72"
@@ -22,8 +23,10 @@ export default class Iphone extends Component {
 		super(props);
 		this.setState({
 			location: "London",
+			displayHomeScreen: true,
 			displaySearchPanel: false,
-
+			displayFavouritesPanel: false,
+			savedLocations: []
 		});
 
 		// Fetching the current weather data and forecast data using two API calls
@@ -67,10 +70,39 @@ export default class Iphone extends Component {
 		})
 	}
 
-	// Switches between showing the information and search panels
-	// Triggered by the bottom buttons - Search / Go Back
-	displaySearchPanel = (value) => {
-		this.setState({ displaySearchPanel: value });
+	// Displays the searching panel
+	// Triggered by the bottom button - Search
+	displaySearchPanel = () => {
+		this.setState({ 
+			displaySearchPanel: true,
+			displayHomeScreen: false,
+			displayFavouritesPanel: false,
+		});
+	}
+
+	// Triggered from within Search / Favourites panel to return to home screen
+	// via Apply Changes / Go Back button
+	displayHomeScreen = (updatedSavedLocations) => {
+		if (updatedSavedLocations) {
+			this.setState({ savedLocations: updatedSavedLocations });
+		}
+		this.setState({ 
+			displayHomeScreen: true,
+			displaySearchPanel: false,
+			displayFavouritesPanel: false,
+		});
+
+		console.log(this.state.savedLocations)
+	}
+
+	// Displays the searching panel
+	// Triggered by the bottom button - Favourites
+	displayFavouritesPanel = () => {
+		this.setState({ 
+			displayFavouritesPanel: true,
+			displayHomeScreen: false,
+			displayHomeScreen: false,
+		});
 	}
 
 	// Triggered from within the Search component when a new location is selected
@@ -89,7 +121,7 @@ export default class Iphone extends Component {
 			<div class={style.container} id="iphone">
 				<Header class={style.header} data={this.state.currWeather}/>
 				<div class={style.body}> 
-					{!this.state.displaySearchPanel ? (
+					{this.state.displayHomeScreen ? (
 						<div class={style.box}>
 							{/* Intro panel with precipitation / pressure / wind speed */}
 							<Panel todayWeather={this.state.currWeather} forecastWeather={this.state.forecast}/>
@@ -102,9 +134,16 @@ export default class Iphone extends Component {
 
 							{/* Switch to Search Panel */}
 							<button  onClick={this.displaySearchPanel}>Search</button>
+
+							{/* Switch to Search Panel */}
+							<button  onClick={this.displayFavouritesPanel}>Favourites</button>
 						</div>
 						/* Search Panel */
-					) : <Search onSelect={this.handleSelect} onBack={this.displaySearchPanel} />} 
+					) : null}
+					{this.state.displaySearchPanel ? 
+						<Search onSelect={this.handleSelect} onBack={this.displayHomeScreen} /> : null}
+					{this.state.displayFavouritesPanel ? 
+						<Favourites savedLocations = {this.state.savedLocations} onSelect={this.handleSelect} onBack={this.displayHomeScreen} /> : null} 
 				</div>
 			</div>
 
